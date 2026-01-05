@@ -1,44 +1,35 @@
-export default async function handler(request) {
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method Not Allowed" });
+  }
 
-    if (request.method !== 'POST') {
-        return new Response(
-            JSON.stringify({ message: 'Method Not Allowed' }),
-            { status: 405, headers: { 'Content-Type': 'application/json' } }
-        );
+  try {
+    const data = req.body;
+
+    let text = "📥 DATA MASUK\n\n";
+    for (const k in data) {
+      text += `${k.toUpperCase()} : ${data[k]}\n`;
     }
 
-    try {
-        const data = await request.json();
+    const telegramURL =
+      `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-        let messageText = '📥 DATA FORM MASUK\n\n';
-        for (const key in data) {
-            messageText += `${key.toUpperCase()} : ${data[key]}\n`;
-        }
+    const tgRes = await fetch(telegramURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: process.env.CHAT_ID,
+        text
+      })
+    });
 
-        const telegramURL = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`;
+    const tgText = await tgRes.text();
+    console.log("Telegram response:", tgText);
 
-        await fetch(telegramURL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                chat_id: process.env.CHAT_ID,
-                text: messageText
-            })
-        });
+    return res.status(200).json({ status: "success" });
 
-        return new Response(
-            JSON.stringify({ status: "success" }),
-            { status: 200, headers: { "Content-Type": "application/json" } }
-        );
-
-    } catch (err) {
-        return new Response(
-            JSON.stringify({ status: "error", message: err.message }),
-            { status: 500, headers: { "Content-Type": "application/json" } }
-        );
-    }
+  } catch (err) {
+    console.error("SERVER ERROR:", err);
+    return res.status(500).json({ status: "error" });
+  }
 }
-
-export const config = {
-    runtime: "edge"
-};
