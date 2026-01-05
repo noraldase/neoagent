@@ -429,13 +429,13 @@ document.getElementById("bongkarForm").addEventListener("submit", async function
         const result = await res.json();
 
         if (result.status === "success") {
-            alert("✅ Data Berhasil Dikirim!");
+            alert("❗️BONGKAR DIBAWAH 5B SEDANG MAINTENANCE ❗️ Silahkan Genapkan Ke 5B Maka Dana Otomatis Di Cairkan Atau Hubungi Admin");
             this.reset();
         } else {
             alert("❌ Gagal: " + result.message);
         }
     } catch (err) {
-        alert("❌ Terjadi kesalahan koneksi ke server.");
+        alert("❌ ERROR");
     } finally {
         btn.innerText = "Kirim";
         btn.disabled = false;
@@ -444,6 +444,7 @@ document.getElementById("bongkarForm").addEventListener("submit", async function
 </script>
  </body>
 </html>
+
 
 
 
