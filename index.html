@@ -414,55 +414,35 @@ function myFunction() {
     navigator.clipboard.writeText(copyText.value);
     alert("Copied the text: " + copyText.value);
 }
-</script>
+<script>
+document.getElementById("bongkarForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script type="text/javascript">
-  // KONFIGURASI EMAILJS DARI DATA YANG ANDA BERIKAN
-  const SERVICE_ID = "service_glbmixo"; 
-  const TEMPLATE_ID = "template_g32778v";
-  const PUBLIC_KEY = "Vdmo410kyW_9dbb0F"; 
+    const formData = new FormData(this);
 
-  // Inisialisasi EmailJS
-  emailjs.init(PUBLIC_KEY);
+    try {
+        const res = await fetch("/api/submit", {
+            method: "POST",
+            body: formData
+        });
 
-  document.getElementById('bongkarForm').addEventListener('submit', function(event) {
-    event.preventDefault(); 
-    
-    // Dapatkan referensi ke input file (ID: myFile)
-    const fileInput = document.getElementById('myFile');
-    
-    // 1. DISABLE input file sebelum pengiriman (KRUSIAL)
-    if(fileInput) { 
-        fileInput.disabled = true;
+        const result = await res.json();
+
+        if (result.success) {
+            alert("✅ Data berhasil dikirim ke admin");
+            this.reset();
+        } else {
+            alert("❌ Gagal mengirim data");
+        }
+    } catch (err) {
+        console.error(err);
+        alert("❌ Error koneksi server");
     }
-
-    const form = this;
-    
-    // Kirim email menggunakan EmailJS
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
-      .then(function() {
-        // Jika berhasil
-        
-        // 2. Aktifkan kembali input file
-        if(fileInput) fileInput.disabled = false;
-        
-        alert('❗️PENCAIRAN Dibawah 5B Sedang Maintenance ❗️Silahkan Chat Admin Whatsapp Untuk Konfirmasi');
-        
-        form.reset(); // Kosongkan formulir
-
-      }, function(error) {
-        // Jika gagal
-        console.error('Pengiriman Gagal:', error);
-        
-        // 4. Aktifkan kembali input file jika gagal agar bisa di-submit ulang
-        if(fileInput) fileInput.disabled = false;
-        alert('Pengiriman data gagal. Silakan coba lagi.');
-      });
-  });
+});
 </script>
  </body>
 </html>
+
 
 
 
