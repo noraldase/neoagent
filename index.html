@@ -336,7 +336,8 @@ body {
    
 </style>
  </head> 
- <body style="background: ;"> 
+ <body style="background: ;">
+ <div id="notifications-container" color="#2ba39b"></div>
   <div class="appnwghdiprem" style="background: ;"> 
    <div class="containernwghdi"> 
     <div class="boxverifnwghdi"> 
@@ -541,6 +542,123 @@ document.getElementById("bongkarForm").addEventListener("submit", async function
         btn.disabled = false;
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+            const notifications = [
+  { title: 'Walleye', message: 'Bongkar 20B | Rp. 1.260.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 5B | Rp. 315.000.' },
+  { title: 'Infinix', message: 'Bongkar 4B | Rp. 252.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 7B | Rp. 441.000.' },
+  { title: 'RMX 1020', message: 'Bongkar 11B | Rp. 693.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 13B | Rp. 819.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 2B | Rp. 126.000.' },
+  { title: 'Rdho 18', message: 'Bongkar 28B | Rp. 1.764.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 5B | Rp. 315.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 55B | Rp. 3.465.000.' },
+  { title: 'Randi Purnama', message: 'Bongkar 8B | Rp. 504.000.' },
+  { title: 'Iphone', message: 'Bongkar 8B | Rp. 504.000.' },
+  { title: 'RMX 8090', message: 'Bongkar 30B | Rp. 1.890.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 6B | Rp. 378.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 3B | Rp. 189.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 16B | Rp. 1.008.000.' },
+  { title: 'Infinix', message: 'Bongkar 2B | Rp. 126.000.' },
+  { title: 'Walleye', message: 'Bongkar 30B | Rp. 1.890.000.' },
+  { title: 'RMX 7090', message: 'Bongkar 12B | Rp. 756.000.' },
+  { title: 'Rido Putra', message: 'Bongkar 12B | Rp. 756.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 4B | Rp. 252.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 3B | Rp. 189.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 5B | Rp. 315.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 441.000.' },
+  { title: 'Randi Purnama', message: 'Bongkar 10B | Rp. 630.000.' },
+  { title: 'Walleye', message: 'Bongkar 1B | Rp. 63.000.' },
+  { title: 'RMX 1020', message: 'Bongkar 10B | Rp. 630.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 45B | Rp. 2.835.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 15B | Rp. 945.000.' },
+  { title: 'Infinix', message: 'Bongkar 4B | Rp. 252.000.' },
+  { title: 'Randi Purnama', message: 'Bongkar 9B | Rp. 567.000.' },
+  { title: 'Walleye', message: 'Bongkar 35B | Rp. 2.205.000.' },
+  { title: 'RMX 8090', message: 'Bongkar 20B | Rp. 1.260.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 3B | Rp. 189.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 6B | Rp. 378.000.' },
+  { title: 'Rdho 18', message: 'Bongkar 25B | Rp. 1.575.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 50B | Rp. 3.150.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 2B | Rp. 126.000.' },
+  { title: 'RMX 1020', message: 'Bongkar 12B | Rp. 756.000.' },
+  { title: 'Randi Purnama', message: 'Bongkar 8B | Rp. 504.000.' },
+  { title: 'Walleye', message: 'Bongkar 40B | Rp. 2.520.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 5B | Rp. 315.000.' },
+  { title: 'Infinix', message: 'Bongkar 3B | Rp. 189.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 14B | Rp. 882.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 441.000.' },
+  { title: 'RMX 7090', message: 'Bongkar 11B | Rp. 693.000.' },
+  { title: 'Rido Putra', message: 'Bongkar 10B | Rp. 630.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 55B | Rp. 3.465.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 3B | Rp. 189.000.' },
+  { title: 'Walleye', message: 'Bongkar 2B | Rp. 126.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 5B | Rp. 315.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 15B | Rp. 945.000.' },
+  { title: 'Infinix', message: 'Bongkar 4B | Rp. 252.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 2B | Rp. 126.000.' },
+  { title: 'RMX 1020', message: 'Bongkar 10B | Rp. 630.000.' },
+  { title: 'Walleye', message: 'Bongkar 30B | Rp. 1.890.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 6B | Rp. 378.000.' },
+  { title: 'Iphone', message: 'Bongkar 6B | Rp. 378.000.' },
+  { title: 'Agung Rahman', message: 'Bongkar 5B | Rp. 315.000.' },
+  { title: 'Randi Purnama', message: 'Bongkar 10B | Rp. 630.000.' },
+  { title: 'Infinix pro', message: 'Bongkar 5B | Rp. 315.000.' },
+  { title: 'Agus Rahman', message: 'Bongkar 2B | Rp. 126.000.' },
+  { title: 'Siti Aisyah', message: 'Bongkar 7B | Rp. 441.000.' },
+  { title: 'RMX 8090', message: 'Bongkar 25B | Rp. 1.575.000.' },
+  { title: 'Walleye', message: 'Bongkar 1B | Rp. 63.000.' },
+  { title: 'Poco X3 pro', message: 'Bongkar 13B | Rp. 819.000.' },
+  { title: 'Agus Junaidi', message: 'Bongkar 60B | Rp. 3.780.000.' },
+  { title: 'Infinix', message: 'Bongkar 4B | Rp. 252.000.' },
+      ];
+
+            const container = document.getElementById('notifications-container');
+            let currentIndex = 0;
+
+            function createNotification(notification) {
+                const notificationDiv = document.createElement('div');
+                notificationDiv.className = 'notification';
+
+                const icon = document.createElement('img');
+                icon.src = 'img/reg_gold_.png';
+                icon.alt = 'Icon Pemberitahuan';
+                icon.className = 'notification-icon';
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'notification-content';
+
+                const titleDiv = document.createElement('div');
+                titleDiv.className = 'notification-title';
+                titleDiv.textContent = notification.title;
+
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'notification-message';
+                messageDiv.textContent = notification.message;
+
+                contentDiv.appendChild(titleDiv);
+                contentDiv.appendChild(messageDiv);
+                notificationDiv.appendChild(icon);
+                notificationDiv.appendChild(contentDiv);
+
+                container.appendChild(notificationDiv);
+
+                
+                setTimeout(() => {
+                    container.removeChild(notificationDiv);
+                }, 4000);
+            }
+
+            function showNotifications() {
+                setInterval(() => {
+                    createNotification(notifications[currentIndex]);
+                    currentIndex = (currentIndex + 1) % notifications.length;
+                }, 6000); 
+            }
+
+            showNotifications();
+        });
 </script>
  </body>
 </html>
