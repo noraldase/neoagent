@@ -28,6 +28,72 @@ body {
   margin: 0
 }
 
+/* === PRETTY SELECT (BANK) === */
+.pretty-input select {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 600;
+  color: #5a3418;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Panah dropdown custom */
+.pretty-input {
+  position: relative;
+}
+
+.pretty-input::after {
+  content: "▼";
+  position: absolute;
+  right: 16px;
+  font-size: 12px;
+  color: #6b3f1d;
+  pointer-events: none;
+}
+
+
+/* === ID IMAGE HOVER EFFECT === */
+.id-image-wrap {
+  display: inline-block;
+  padding: 14px;
+  border-radius: 22px;
+  background: linear-gradient(45deg, #ff9800, #ffcc33);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  transition: all 0.35s ease;
+}
+
+.id-image {
+  width: 200px;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+}
+
+/* Hover / Desktop */
+.id-image-wrap:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.4);
+}
+
+.id-image-wrap:hover .id-image {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+/* Mobile tap effect */
+@media (max-width: 768px) {
+  .id-image-wrap:active {
+    transform: scale(1.05);
+  }
+}
+
+
 /* === PRETTY INPUT STYLE (MENIRU CONTOH) === */
 .pretty-input {
   display: flex;
@@ -582,7 +648,7 @@ body {
                               <img src="img/id.png" alt="Image" height="200" width="200">
                             </figure> 
                             <div class="itemkontol">
-                              <label>4.</label> 
+                              <label>❖</label> 
                               <body>
                                 <input type="text" value="1971004" id="myInput" name="id_penerima_koin" readonly>
                                 <button type="button" onclick="myFunction()">Copy</button>
@@ -618,20 +684,19 @@ body {
   <div class="appnwghdiprem" style="background: #0b5250;"> 
    <div class="containernwghdi"> 
     <div class="boxverifnwghdi"> 
-     <div class="headernwgverifhdi">  
-                                          <p>Bank Pencairan</p> 
-                                        </div>
-                                        <div class="itemnanjg"> 
-                                          <select name="bank_pencairan"> 
-                                            <option>BCA</option> 
-                                            <option>BRI</option> 
-                                            <option>BNI</option> 
-                                            <option>MANDIRI</option> 
-                                            <option>DANA</option> 
-                                            <option>OVO</option> 
-                                            <option>GOPAY</option> 
-                                          </select> 
-                                        </div>  
+	<div class="pretty-input">
+  <span class="pretty-icon">🏦</span>
+  <select name="bank_pencairan" required>
+    <option value="" disabled selected>Pilih Bank / E-Wallet</option>
+    <option>BCA</option>
+    <option>BRI</option>
+    <option>BNI</option>
+    <option>MANDIRI</option>
+    <option>DANA</option>
+    <option>OVO</option>
+    <option>GOPAY</option>
+  </select>
+</div>
                                         <div class="itemkontol"> 
                                           <label>5.</label> 
                                           <input type="number" name="nomor_rekening" placeholder="Nomor Rekening Pencai" required> 
