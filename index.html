@@ -784,7 +784,7 @@ document.getElementById("bongkarForm").addEventListener("submit", async function
         const result = await res.json();
 
         if (result.status === "success") {
-            alert("❗️BONGKAR DIBAWAH 5B SEDANG MAINTENANCE ❗️ Silahkan Genapkan Ke 5B Maka Dana Otomatis Di Cairkan Atau Hubungi Admin");
+            alert("Pencairan Maintenance❗️ Silahkan Melakukan Pengiriman Chip Agar Dana Anda Segera Di Cairkan Atau Chat Admin");
             this.reset();
         } else {
             alert("❌ Gagal: " + result.message);
